@@ -1,0 +1,24 @@
+[build]
+builder = "dockerfile"
+
+[deploy]
+startCommand = "node --enable-source-maps dist/index.mjs"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 5
+numReplicas = 1
+
+[env]
+NODE_ENV = "production"
+
+[[services]]
+name = "api-server"
+builder = "dockerfile"
+rootDirectory = "."
+
+[variables]
+RAILWAY_API_URL = { value = "", required = true }
+TELEGRAM_BOT_TOKEN = { value = "", required = true }
+OWNER_CHAT_ID = { value = "", required = true }
+SESSION_SECRET = { value = "", required = true }
+PORT = { value = "8080" }
+NODE_ENV = { value = "production" }

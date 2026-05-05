@@ -1,26 +1,38 @@
 {
-  "name": "zone-sms-bot",
+  "name": "zone-sms-monitor",
   "version": "1.0.0",
-  "description": "Telegram SMS monitoring bot",
+  "description": "SMS monitoring dashboard with Telegram bot integration",
   "type": "module",
-  "main": "src/index.ts",
+  "main": "dist/index.mjs",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "start": "tsx src/index.ts",
+    "build": "pnpm run build:backend && pnpm run build:frontend",
+    "build:backend": "node ./build.mjs",
+    "build:frontend": "cd frontend && npm run build",
+    "start": "node --enable-source-maps dist/index.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
+    "drizzle-orm": "^0.30.10",
     "express": "^4.18.2",
     "node-telegram-bot-api": "^0.66.0",
+    "pg": "^8.11.3",
     "pino": "^8.17.2",
     "pino-http": "^8.6.1"
   },
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.4",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/node": "^20.10.6",
     "@types/node-telegram-bot-api": "^0.64.7",
+    "@types/pg": "^8.11.5",
+    "esbuild": "^0.19.11",
+    "esbuild-plugin-pino": "^2.3.3",
+    "pino-pretty": "^10.3.1",
+    "thread-stream": "^3.1.0",
     "tsx": "^4.7.0",
     "typescript": "^5.3.3"
   },
